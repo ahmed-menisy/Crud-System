@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <!-- ----------------- Start Meta Data ----------------- -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <meta name="description" content="Crud System" />
+      <meta name="keywords" content="crud system,65 keywords" />
+      <meta name="author" content="AHMED MENISY" />
+      <!-- ----------------- End Meta Data ----------------- -->
+      <title>Crud System</title>
+      <!-- ----------------- Start Link Relashin ----------------- -->
+      <!-- Font Awesome css file -->
+      <link rel="stylesheet" href="./css/all.min.css" />
+      <!-- Bootstrap css file  -->
+      <link rel="stylesheet" href="./css/bootstrap.min.css" />
+      <!-- Custome Css file -->
+      <link rel="stylesheet" href="./css/main.css" />
+      <!-- ----------------- End Link Relashin ----------------- -->
+   </head>
+   <body class="bg-light">
+      <main class="container py-5 text-secondary">
+         <section class="shadow rounded text-center">
+            <div class="crud-data w-50 m-auto py-5 ">
+               <h1 class="display-5 mb-5">CRUD SYSTEM</h1>
+               <div class="vstack gap-3 ">
+                  <div class="data ">
+                     <label
+                        for="productInputName"
+                        class="form-label pe-none ms-2"
+                     >
+                        ProductName<span class="text-danger">*</span>
+                     </label>
+                     <input
+                        type="text"
+                        id="productInputName"
+                        class="form-control"
+                     />
+                  </div>
+                  <div class="data ">
+                     <label
+                        for="productInputPrice"
+                        class="form-label pe-none ms-2"
+                     >
+                        ProductPrice<span class="text-danger">*</span>
+                     </label>
+                     <input
+                        type="text"
+                        id="productInputPrice"
+                        class="form-control"
+                     />
+                  </div>
+                  <div class="data ">
+                     <label
+                        for="productInputCategory"
+                        class="form-label pe-none ms-2"
+                     >
+                        ProductCategory<span class="text-danger">*</span>
+                     </label>
+                     <input
+                        type="text"
+                        id="productInputCategory"
+                        class="form-control"
+                     />
+                  </div>
+                  <div class="data ">
+                     <label
+                        for="productInputDes"
+                        class="form-label pe-none ms-2"
+                     >
+                        ProductDes<span class="text-danger">*</span>
+                     </label>
+                     <textarea id="productInputDes" class="form-control"></textarea>
+                     <div class="invalid-feedback all-valid">
+                        Please Enter all Data.
+                      </div>
+                  </div>
+               </div>
+               <div class="btn-group gap-3 mt-4">
+                  <button
+                     id="addProduct"
+                     type="button"
+                     class="btn btn-outline-success btn-sm rounded-0"
+                  >
+                     Add Product
+                  </button>
+                  <button
+                     id="updateProduct"
+                     type="button"
+                     class="btn btn-outline-warning btn-sm rounded-0 d-none"
+                  >
+                     Update Product
+                  </button>
+                  <button
+                     id="clearForm"
+                     type="button"
+                     class="btn btn-outline-secondary btn-sm rounded-0"
+                  >
+                     Clear
+                  </button>
+               </div>
+            </div>
+         </section>
+         <input
+            type="search"
+            id="productSearch"
+            class="form-control form-control-sm mx-auto mt-5 w-50"
+            placeholder="Search... "
+         />
+         <section class="pt-5">
+            <div class="table-responsive">
+               <table class="table text-center font-monospace text-nowrap">
+                  <thead>
+                     <th>#</th>
+                     <th>Name</th>
+                     <th>Price</th>
+                     <th>Category</th>
+                     <th>Description</th>
+                     <th>Action</th>
+                  </thead>
+                  <tbody id="tableData"></tbody>
+               </table>
+            </div>
+         </section>
+      </main>
+      <!-- Sweet alert -->
+      <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+      <!-- Bootstrap Js File -->
+      <script src="./js/bootstrap.bundle.min.js"></script>
+      <!-- Custome Js file -->
+      <script src="./js/main.js"></script>
+   </body>
+</html>

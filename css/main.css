@@ -1,0 +1,8 @@
+/* table */
+.table-responsive {
+   overflow-y: auto;
+   height: 350px;
+}
+.icon-table {
+   cursor: pointer;
+}
