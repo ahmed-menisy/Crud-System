@@ -22,7 +22,7 @@ let curentIndexUpdate;
 (() => {
    if (GetStorage() != null) {
       products = GetStorage();
-      displayProducts();
+      displayProducts(true);
    }
 })();
 // ----------------- Functions -----------------
@@ -37,28 +37,36 @@ function getProdut() {
    products.push(product);
 }
 // Display Data In Table
-function displayProducts() {
+function displayProducts(defaultDisplayOrSearch) {
+   // if == true deafult display if nothing set undefind
    let tableData = "";
    products.forEach((item, index) => {
-      tableData += `
-      <tr>
-      <td>${index + 1}</td>
-      <td>${item.name}</td>
-      <td>${item.price}</td>
-      <td>${item.category}</td>
-      <td>${item.descrip}</td>
-      <td>
-         <i
-            class="fa-solid fa-pen-to-square me-1 text-secondary icon-table"
-            id="btnEdit"
-            onclick="getUpdateInfo(${index})"
-         ></i>
-         <i class="fa-solid fa-trash-can text-danger icon-table" id="btnDelete"
-         onclick="deleteRow(${index})"
-         ></i>
-      </td>
-   </tr>
-      `;
+      // when send true return true , when send undefind send  return false so this return antohr code after :
+      if (
+         defaultDisplayOrSearch
+            ? true
+            : item.name.toUpperCase().includes(productSearch.value.toUpperCase())
+      ) {
+         tableData += `
+         <tr>
+         <td>${index + 1}</td>
+         <td>${item.name}</td>
+         <td>${item.price}</td>
+         <td>${item.category}</td>
+         <td>${item.descrip}</td>
+         <td>
+            <i
+               class="fa-solid fa-pen-to-square me-1 text-secondary icon-table"
+               id="btnEdit"
+               onclick="getUpdateInfo(${index})"
+            ></i>
+            <i class="fa-solid fa-trash-can text-danger icon-table" id="btnDelete"
+            onclick="deleteRow(${index})"
+            ></i>
+         </td>
+      </tr>
+         `;
+      }
    });
    tableBody.innerHTML = tableData;
    totaProduct.innerHTML = products.length;
@@ -85,7 +93,7 @@ function deleteRow(index) {
    }).then((result) => {
       if (result.isConfirmed) {
          products.splice(index, 1);
-         displayProducts();
+         displayProducts(true);
          setStorage();
          Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
@@ -110,9 +118,8 @@ function updateRow() {
       descrip: productInputDes.value,
    };
    if (!inputs.find((input) => input.classList.contains("is-invalid"))) {
-      console.log("heel");
       products.splice(curentIndexUpdate, 1, product);
-      displayProducts();
+      displayProducts(true);
       setStorage();
       resetForm();
       Swal.fire("Good job!", "Update Product", "success");
@@ -153,21 +160,19 @@ btnAddProduct.addEventListener("click", () => {
    inputs.forEach((input) => {
       if (input.value == "") {
          inValidAll.classList.add("d-block");
-         
       }
       if (input.classList.contains("is-valid")) {
          checkValid++;
          if (checkValid == inputs.length) {
             // when check == inputs length it should be all data valid
             getProdut();
-            displayProducts();
+            displayProducts(true);
             setStorage();
             resetForm();
             Swal.fire("Good job!", "Add Product", "success");
             inValidAll.classList.remove("d-block");
          }
       }
-    
    });
 });
 // button Update Product
@@ -177,32 +182,8 @@ btnUpdateProduct.addEventListener("click", () => {
 // button Clear Form
 btnClearForm.addEventListener("click", resetForm);
 // Search Product
-productSearch.addEventListener("input", function () {
-   let tableData = "";
-   products.forEach((item, index) => {
-      if (item.name.toUpperCase().includes(this.value.toUpperCase())) {
-         tableData += `
-         <tr>
-         <td>${index + 1}</td>
-         <td>${item.name}</td>
-         <td>${item.price}</td>
-         <td>${item.category}</td>
-         <td>${item.descrip}</td>
-         <td>
-            <i
-               class="fa-solid fa-pen-to-square me-1 text-secondary icon-table"
-               id="btnEdit"
-               onclick="getUpdateInfo(${index})"
-            ></i>
-            <i class="fa-solid fa-trash-can text-danger icon-table" id="btnDelete"
-            onclick="deleteRow(${index})"
-            ></i>
-         </td>
-      </tr>
-         `;
-      }
-   });
-   tableBody.innerHTML = tableData;
+productSearch.addEventListener("input", () => {
+   displayProducts();
 });
 // Delete all data
 deleteAllData.addEventListener("click", () => {
@@ -218,7 +199,7 @@ deleteAllData.addEventListener("click", () => {
       if (result.isConfirmed) {
          products.splice(0);
          setStorage();
-         displayProducts();
+         displayProducts(true);
          Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
    });
