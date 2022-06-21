@@ -125,7 +125,7 @@ function updateRow() {
       descrip: productInputDes.value,
    };
    if (!inputs.find((input) => input.classList.contains("is-invalid"))) {
-      products.splice(curentIndexUpdate, 1, product);
+      products[curentIndexUpdate] = product;
       displayProducts(true);
       setStorage();
       resetForm();
