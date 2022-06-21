@@ -160,9 +160,10 @@ btnAddProduct.addEventListener("click", () => {
             setStorage();
             Swal.fire("Good job!", "Add Product", "success");
             inValidAll.classList.remove("d-block");
-         } else {
-            inValidAll.classList.add("d-block");
          }
+      }
+      if (input.value == "") {
+         inValidAll.classList.add("d-block");
       }
    });
 });
