@@ -45,7 +45,9 @@ function displayProducts(defaultDisplayOrSearch) {
       if (
          defaultDisplayOrSearch
             ? true
-            : item.name.toUpperCase().includes(productSearch.value.toUpperCase())
+            : item.name
+                 .toUpperCase()
+                 .includes(productSearch.value.toUpperCase())
       ) {
          tableData += `
          <tr>
@@ -153,9 +155,8 @@ function regexCheck(element, regexCode) {
       inValidAll.classList.remove("d-block");
    });
 }
-// ----------------- Events -----------------
-// button Add Product
-btnAddProduct.addEventListener("click", () => {
+// function to add product
+const addProduct = () => {
    let checkValid = 0; // for plus 1 evry time loop
    inputs.forEach((input) => {
       if (input.value == "") {
@@ -174,7 +175,10 @@ btnAddProduct.addEventListener("click", () => {
          }
       }
    });
-});
+};
+// ----------------- Events -----------------
+// button Add Product
+btnAddProduct.addEventListener("click", addProduct);
 // button Update Product
 btnUpdateProduct.addEventListener("click", () => {
    updateRow();
@@ -203,6 +207,15 @@ deleteAllData.addEventListener("click", () => {
          Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
    });
+});
+// key down
+addEventListener("keyup", (e) => {
+   if (e.key == "Enter") {
+      addProduct();
+   }
+   else if (e.key == "Escape") {
+      resetForm();
+   }
 });
 // ----------------- Regex -----------------
 let textRegex =
