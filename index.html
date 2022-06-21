@@ -21,10 +21,10 @@
    <body class="bg-light">
       <main class="container py-5 text-secondary">
          <section class="shadow rounded text-center">
-            <div class="crud-data w-50 m-auto py-5 ">
+            <div class="crud-data w-50 m-auto py-5">
                <h1 class="display-5 mb-5">CRUD SYSTEM</h1>
-               <div class="vstack gap-3 ">
-                  <div class="data ">
+               <div class="vstack gap-3">
+                  <div class="data">
                      <label
                         for="productInputName"
                         class="form-label pe-none ms-2"
@@ -37,7 +37,7 @@
                         class="form-control"
                      />
                   </div>
-                  <div class="data ">
+                  <div class="data">
                      <label
                         for="productInputPrice"
                         class="form-label pe-none ms-2"
@@ -50,7 +50,7 @@
                         class="form-control"
                      />
                   </div>
-                  <div class="data ">
+                  <div class="data">
                      <label
                         for="productInputCategory"
                         class="form-label pe-none ms-2"
@@ -63,17 +63,20 @@
                         class="form-control"
                      />
                   </div>
-                  <div class="data ">
+                  <div class="data">
                      <label
                         for="productInputDes"
                         class="form-label pe-none ms-2"
                      >
                         ProductDes<span class="text-danger">*</span>
                      </label>
-                     <textarea id="productInputDes" class="form-control"></textarea>
+                     <textarea
+                        id="productInputDes"
+                        class="form-control"
+                     ></textarea>
                      <div class="invalid-feedback all-valid">
                         Please Enter all Data.
-                      </div>
+                     </div>
                   </div>
                </div>
                <div class="btn-group gap-3 mt-4">
@@ -109,8 +112,22 @@
          />
          <section class="pt-5">
             <div class="table-responsive">
-               <table class="table text-center font-monospace text-nowrap caption-top">
-                  <caption>Total : <span id="totaProduct" class="badge bg-secondary">0</span></caption>
+               <table
+                  class="table text-center font-monospace text-nowrap caption-top"
+               >
+                  <caption>
+                     Total :
+                     <span id="totaProduct" class="badge bg-secondary">0</span>
+                  </caption>
+                  <lord-icon
+                     src="https://cdn.lordicon.com/gsqxdxog.json"
+                     trigger="click"
+                     colors="primary:#121331,secondary:#08a88a"
+                     stroke="80"
+                     style="width: 40px; height: 40px"
+                     id="deleteAllData"
+                  >
+                  </lord-icon>
                   <thead>
                      <th>#</th>
                      <th>Name</th>
@@ -124,6 +141,8 @@
             </div>
          </section>
       </main>
+      <!-- animation icon -->
+      <script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
       <!-- Sweet alert -->
       <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
       <!-- Bootstrap Js File -->

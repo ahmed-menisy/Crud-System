@@ -3,6 +3,6 @@
    overflow-y: auto;
    height: 350px;
 }
-.icon-table {
+:is(lord-icon, .icon-table) {
    cursor: pointer;
 }

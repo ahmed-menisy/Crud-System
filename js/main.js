@@ -3,6 +3,7 @@
 const btnAddProduct = document.getElementById("addProduct");
 const btnUpdateProduct = document.getElementById("updateProduct");
 const btnClearForm = document.getElementById("clearForm");
+const deleteAllData = document.getElementById("deleteAllData");
 const productInputName = document.getElementById("productInputName");
 const productInputPrice = document.getElementById("productInputPrice");
 const productInputCategory = document.getElementById("productInputCategory");
@@ -150,21 +151,23 @@ function regexCheck(element, regexCode) {
 btnAddProduct.addEventListener("click", () => {
    let checkValid = 0; // for plus 1 evry time loop
    inputs.forEach((input) => {
+      if (input.value == "") {
+         inValidAll.classList.add("d-block");
+         
+      }
       if (input.classList.contains("is-valid")) {
          checkValid++;
          if (checkValid == inputs.length) {
             // when check == inputs length it should be all data valid
             getProdut();
             displayProducts();
-            resetForm();
             setStorage();
+            resetForm();
             Swal.fire("Good job!", "Add Product", "success");
             inValidAll.classList.remove("d-block");
          }
       }
-      if (input.value == "") {
-         inValidAll.classList.add("d-block");
-      }
+    
    });
 });
 // button Update Product
@@ -200,6 +203,25 @@ productSearch.addEventListener("input", function () {
       }
    });
    tableBody.innerHTML = tableData;
+});
+// Delete all data
+deleteAllData.addEventListener("click", () => {
+   Swal.fire({
+      title: "Delete All Data?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete all!",
+   }).then((result) => {
+      if (result.isConfirmed) {
+         products.splice(0);
+         setStorage();
+         displayProducts();
+         Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+   });
 });
 // ----------------- Regex -----------------
 let textRegex =
