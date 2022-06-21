@@ -176,21 +176,8 @@ const addProduct = () => {
       }
    });
 };
-// ----------------- Events -----------------
-// button Add Product
-btnAddProduct.addEventListener("click", addProduct);
-// button Update Product
-btnUpdateProduct.addEventListener("click", () => {
-   updateRow();
-});
-// button Clear Form
-btnClearForm.addEventListener("click", resetForm);
-// Search Product
-productSearch.addEventListener("input", () => {
-   displayProducts();
-});
-// Delete all data
-deleteAllData.addEventListener("click", () => {
+// delte all data
+function deletetableData() {
    Swal.fire({
       title: "Delete All Data?",
       text: "You won't be able to revert this!",
@@ -207,13 +194,27 @@ deleteAllData.addEventListener("click", () => {
          Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
    });
+}
+// ----------------- Events -----------------
+// button Add Product
+btnAddProduct.addEventListener("click", addProduct);
+// button Update Product
+btnUpdateProduct.addEventListener("click", () => {
+   updateRow();
 });
-// key down
+// button Clear Form
+btnClearForm.addEventListener("click", resetForm);
+// Search Product
+productSearch.addEventListener("input", () => {
+   displayProducts();
+});
+// Delete all data
+deleteAllData.addEventListener("click", deletetableData);
+// key up
 addEventListener("keyup", (e) => {
    if (e.key == "Enter") {
       addProduct();
-   }
-   else if (e.key == "Escape") {
+   } else if (e.key == "Escape") {
       resetForm();
    }
 });
