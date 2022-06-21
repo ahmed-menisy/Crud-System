@@ -9,7 +9,10 @@ const productInputCategory = document.getElementById("productInputCategory");
 const productInputDes = document.getElementById("productInputDes");
 const productSearch = document.getElementById("productSearch");
 const tableBody = document.getElementById("tableData");
-const inputs = document.querySelectorAll(".crud-data .form-control");
+const totaProduct = document.getElementById("totaProduct");
+const inputs = Array.from(
+   document.querySelectorAll(".crud-data .form-control")
+);
 const inValidAll = document.querySelector(".all-valid");
 // ----------------- Global Variables -----------------
 let products = [];
@@ -57,7 +60,7 @@ function displayProducts() {
       `;
    });
    tableBody.innerHTML = tableData;
-   
+   totaProduct.innerHTML = products.length;
 }
 // Reset Form
 function resetForm() {
@@ -71,26 +74,21 @@ function resetForm() {
 // Delete Row
 function deleteRow(index) {
    Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
-    }).then((result) => {
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+   }).then((result) => {
       if (result.isConfirmed) {
          products.splice(index, 1);
          displayProducts();
          setStorage();
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+         Swal.fire("Deleted!", "Your file has been deleted.", "success");
       }
-    })
-
+   });
 }
 // Get Update Info
 function getUpdateInfo(index) {
@@ -110,10 +108,16 @@ function updateRow() {
       category: productInputCategory.value,
       descrip: productInputDes.value,
    };
-   products.splice(curentIndexUpdate, 1, product);
-   displayProducts();
-   setStorage();
-   
+   if (!inputs.find((input) => input.classList.contains("is-invalid"))) {
+      console.log("heel");
+      products.splice(curentIndexUpdate, 1, product);
+      displayProducts();
+      setStorage();
+      resetForm();
+      Swal.fire("Good job!", "Update Product", "success");
+      btnAddProduct.classList.remove("d-none");
+      btnUpdateProduct.classList.add("d-none");
+   }
 }
 // Set Data To Local Storage
 function setStorage() {
@@ -154,11 +158,7 @@ btnAddProduct.addEventListener("click", () => {
             displayProducts();
             resetForm();
             setStorage();
-            Swal.fire(
-               'Good job!',
-               'Add Product',
-               'success'
-             )
+            Swal.fire("Good job!", "Add Product", "success");
             inValidAll.classList.remove("d-block");
          } else {
             inValidAll.classList.add("d-block");
@@ -169,14 +169,6 @@ btnAddProduct.addEventListener("click", () => {
 // button Update Product
 btnUpdateProduct.addEventListener("click", () => {
    updateRow();
-   resetForm();
-   Swal.fire(
-      'Good job!',
-      'Update Product',
-      'success'
-    )
-   btnAddProduct.classList.remove("d-none");
-   btnUpdateProduct.classList.add("d-none");
 });
 // button Clear Form
 btnClearForm.addEventListener("click", resetForm);
@@ -210,7 +202,7 @@ productSearch.addEventListener("input", function () {
 });
 // ----------------- Regex -----------------
 let textRegex =
-   /^(?:[a-zA-Z\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,80}$/;
+   /^(?:[a-zA-Z\d\s@,=%$#&_\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]|(?:\uD802[\uDE60-\uDE9F]|\uD83B[\uDE00-\uDEFF])){0,80}$/;
 let numRegex = /^\d{0,8}(\.\d{1,4})?$/;
 regexCheck(productInputName, textRegex);
 regexCheck(productInputPrice, numRegex);
