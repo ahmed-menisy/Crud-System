@@ -218,7 +218,7 @@ deleteAllData.addEventListener("click", deletetableData);
 // key up
 addEventListener("keyup", (e) => {
    if (e.key == "Enter") {
-      addProduct();
+      btnAddProduct.classList.contains("d-none") ? updateRow() : addProduct();
    } else if (e.key == "Escape") {
       resetForm();
    }
