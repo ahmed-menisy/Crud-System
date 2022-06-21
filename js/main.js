@@ -36,23 +36,28 @@ function getProdut() {
    };
    products.push(product);
 }
-// Display Data In Table
+// Display Data In Table Or Display Search
 function displayProducts(defaultDisplayOrSearch) {
    // if == true deafult display if nothing set undefind
    let tableData = "";
    products.forEach((item, index) => {
       // when send true return true , when send undefind send  return false so this return antohr code after :
-      if (
-         defaultDisplayOrSearch
-            ? true
+      let checkSearch = defaultDisplayOrSearch
+         ? true
+         : item.name.toUpperCase().includes(productSearch.value.toUpperCase());
+      if (checkSearch) {
+         let colorText = defaultDisplayOrSearch
+            ? item.name
             : item.name
-                 .toUpperCase()
-                 .includes(productSearch.value.toUpperCase())
-      ) {
+                 .toLowerCase()
+                 .replace(
+                    productSearch.value.toLowerCase(),
+                    `<span class="text-bg-secondary ">${productSearch.value.toLowerCase()}</span>`
+                 );
          tableData += `
          <tr>
          <td>${index + 1}</td>
-         <td>${item.name}</td>
+         <td>${colorText}</td>
          <td>${item.price}</td>
          <td>${item.category}</td>
          <td>${item.descrip}</td>
