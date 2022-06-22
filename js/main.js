@@ -129,7 +129,7 @@ function updateRow() {
       displayProducts(true);
       setStorage();
       resetForm();
-      Swal.fire("Good job!", "Update Product", "success");
+      Swal.fire("Updated!", "Success", "success");
       btnAddProduct.classList.remove("d-none");
       btnUpdateProduct.classList.add("d-none");
    }
@@ -175,7 +175,7 @@ const addProduct = () => {
             displayProducts(true);
             setStorage();
             resetForm();
-            Swal.fire("Good job!", "Add Product", "success");
+            Swal.fire("Add Product!", "Success", "success");
             inValidAll.classList.remove("d-block");
          }
       }
